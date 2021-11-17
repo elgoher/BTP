@@ -4,6 +4,7 @@ using {
 from '../db/schema';
 @path: 'service/risk'
 service RiskService {
+  
   entity Risks @(restrict: [{
       grant: ['READ'],
       to: ['RiskViewer']
@@ -14,6 +15,7 @@ service RiskService {
     }
   ]) as projection on my.Risks;
   annotate Risks with @odata.draft.enabled;
+
 
   entity Mitigations @(restrict: [{
       grant: ['READ'],
