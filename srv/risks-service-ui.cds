@@ -65,9 +65,7 @@ annotate RiskService.Risks with @(
 			]
 		}
 	},
-) {
-
-};
+);
 
 annotate RiskService.Risks with {
 	miti @(
