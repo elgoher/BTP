@@ -1,74 +1,77 @@
 {
-    "name": "cpapp",
-    "version": "1.0.0",
-    "description": "A simple CAP project.",
-    "repository": "<Add your repository here>",
-    "license": "UNLICENSED",
-    "private": true,
-    "dependencies": {
-        "@sap/cds": "^5",
-        "@sap/xssec": "^3.2.10",
-        "express": "^4",
-        "hdb": "^0.18.3",
-        "passport": "^0.5.0"
+  "name": "cpapp",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^5.7.3",
+    "@sap/xssec": "^3.2.10",
+    "express": "^4",
+    "hdb": "^0.18.3",
+    "passport": "^0.5.0"
+  },
+  "devDependencies": {
+    "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+    "@sap/ux-specification": "^1.90.14",
+    "@sapui5/ts-types": "^1.92.2",
+    "eslint": "^7.32.0",
+    "sqlite3": "^4.2.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch-risks": "cds watch --open risks/webapp/index.html#fe-lrop-v4",
+    "watch-mitigations": "cds watch --open mitigations/webapp/index.html#fe-lrop-v4",
+    "undeploy": "cf undeploy cpapp --delete-services --delete-service-keys"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
     },
-    "devDependencies": {
-        "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
-        "@sap/ux-specification": "^1.90.14",
-        "@sapui5/ts-types": "^1.92.2",
-        "eslint": "^7.32.0",
-        "sqlite3": "^4.2.0"
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
     },
-    "engines": {
-        "node": ">=14"
-    },
-    "scripts": {
-        "start": "cds run",
-        "watch-risks": "cds watch --open risks/webapp/index.html#fe-lrop-v4",
-        "watch-mitigations": "cds watch --open mitigations/webapp/index.html#fe-lrop-v4",
-        "undeploy": "cf undeploy cpapp --delete-services --delete-service-keys"
-    },
-    "eslintConfig": {
-        "extends": "eslint:recommended",
-        "env": {
-            "es2020": true,
-            "node": true,
-            "jest": true,
-            "mocha": true
-        },
-        "globals": {
-            "SELECT": true,
-            "INSERT": true,
-            "UPDATE": true,
-            "DELETE": true,
-            "CREATE": true,
-            "DROP": true,
-            "CDL": true,
-            "CQL": true,
-            "CXL": true,
-            "cds": true
-        },
-        "rules": {
-            "no-console": "off",
-            "require-atomic-updates": "off"
-        }
-    },
-    "sapux": [
-        "app/risks",
-        "app/mitigations"
-    ],
-    "cds": {
-        "requires": {
-            "db": {
-                "kind": "sql"
-            },
-            "uaa": {
-                "kind": "xsuaa",
-                "credentials": {}
-            }
-        },
-        "hana": {
-            "deploy-format": "hdbtable"
-        }
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
     }
+  },
+  "sapux": [
+    "app/risks",
+    "app/mitigations"
+  ],
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "risks.db"
+        }
+      },
+      "uaa": {
+        "kind": "xsuaa",
+        "credentials": {}
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  }
 }
